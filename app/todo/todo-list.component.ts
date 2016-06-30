@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 
+import { Todo } from './todo';
 import { TodoItemComponent } from './todo-item.component';
 
 @Component({
@@ -9,5 +10,15 @@ import { TodoItemComponent } from './todo-item.component';
     directives: [TodoItemComponent]
 })
 export class TodoListComponent {
-    @Input() todos: string[];
+    @Input() todos: Todo[];
+
+    onTodoDeleted(todo: Todo) {
+        if (todo) {
+            let index = this.todos.indexOf(todo);
+
+            if (index > -1) {
+                this.todos.splice(index, 1);
+            }
+        }
+    }
 }
