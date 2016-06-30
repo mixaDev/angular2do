@@ -12,14 +12,12 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
 })
 export class AppComponent {
     title: string;
-    todos: Todo[];
 
     constructor() {
         this.title = 'Angular 2Do';
-        this.todos = [];
     }
 
     onTodoAdded(todo: Todo) {
-        this.todos.push(todo);
+        
     }
 }
