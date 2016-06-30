@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { Todo } from './todo/todo';
 import { TodoListComponent } from './todo/todo-list.component';
 
 @Component({
@@ -10,7 +11,7 @@ import { TodoListComponent } from './todo/todo-list.component';
 })
 export class AppComponent {
     title: string;
-    todos: string[];
+    todos: Todo[];
 
     constructor() {
         this.title = 'Angular 2Do';
@@ -18,6 +19,7 @@ export class AppComponent {
     }
 
     addTodo(title: string) {
-        this.todos.push(title);
+        let todo = new Todo(title);
+        this.todos.push(todo);
     }
 }
