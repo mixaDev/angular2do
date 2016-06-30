@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Todo } from '../../shared/todo.model';
+import { ITodo } from '../../shared/todo.model';
 import { TodoItemComponent } from '../todo-item/todo-item.component';
 import { TodoService } from '../../shared/todo.service';
 
@@ -8,21 +8,20 @@ import { TodoService } from '../../shared/todo.service';
     selector: 'todo-list',
     templateUrl: './app/components/todo-list/todo-list.component.html',
     styleUrls: ['./app/components/todo-list/todo-list.component.css'],
-    directives: [TodoItemComponent],
-    providers: [TodoService]
+    directives: [TodoItemComponent]
 })
 export class TodoListComponent implements OnInit {
-    todos: Todo[];
+    todos: ITodo[];
 
     constructor(private todoService: TodoService) {
         this.todos = [];
     }
 
     ngOnInit() {
-        this.todos = this.todoService.getTodos();
+        this.todoService.getTodos().then(todos => this.todos = todos);
     }
 
-    get sortedTodos() {
+    get sortedTodos(): ITodo[] {
         return this.todos
         .map(todo => todo)
         .sort((a, b) => {
@@ -37,13 +36,7 @@ export class TodoListComponent implements OnInit {
         });
     }
 
-    onTodoDeleted(todo: Todo) {
-        if (todo) {
-            let index = this.todos.indexOf(todo);
-
-            if (index > -1) {
-                this.todos.splice(index, 1);
-            }
-        }
+    onTodoDeleted(todo: ITodo): void {
+        this.todoService.deleteTodo(todo);
     }
 }
