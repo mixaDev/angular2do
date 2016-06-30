@@ -7,8 +7,16 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
     title: string;
+    todos: string[];
 
     constructor() {
-        this.title = 'Angular 2Do!';
+        this.title = 'Angular 2Do';
+        this.todos = [];
+    }
+
+    addTodo(input: HTMLInputElement) {
+        let title = input.value;
+        input.value = '';
+        this.todos.push(title);
     }
 }
